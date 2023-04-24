@@ -1,0 +1,13 @@
+#submit{
+    display: flex;
+    justify-content: center;
+}
+
+#submit-btn {
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+#bar{
+    width: 100%;
+}
