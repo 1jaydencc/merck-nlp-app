@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 
 function SearchBar({ renderResults }) {
+  const url = process.env.REACT_APP_API_ENDPOINT;
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
@@ -31,7 +32,7 @@ function SearchBar({ renderResults }) {
 
       try {
         setConfirmation('Searching...');
-        const response = await axios.post("http://3.85.227.114/query", {
+        const response = await axios.post(`${url}/query`, {
           term: searchTerm,
         }, {
           headers: {
@@ -47,6 +48,7 @@ function SearchBar({ renderResults }) {
       } catch (error) {
         console.error("Error making POST request:", error);
         setMessage("Error occured while searching. Please try again.");
+        setConfirmation('');
       }
     }
   };

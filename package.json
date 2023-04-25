@@ -12,6 +12,7 @@
     "aws-sdk": "^2.1353.0",
     "axios": "^1.2.0",
     "bootstrap": "^5.2.2",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "file-saver": "^2.0.5",
     "http-proxy-middleware": "^2.0.6",

@@ -31,6 +31,7 @@ function Upload() {
 
   const [acceptedFile, setAcceptedFile] = useState(null);
   const timers = useRef([]);
+  const url = process.env.REACT_APP_API_ENDPOINT;
 
   useEffect(() => {
     const beforeUnloadHandler = (e) => {
@@ -112,7 +113,7 @@ function Upload() {
     try {
       const mergedData = mergeUpdatedValues(updatedValues);
       console.log('Sending data to server:', mergedData);
-      await axios.post('http://3.85.227.114/save', { 'fields': mergedData });
+      await axios.post(`${url}/save`, { 'fields': mergedData });
       setReviewConfirmation('Data saved successfully.');
     } catch (error) {
       setReviewMessage('An error occured while saving the data.');
@@ -150,7 +151,6 @@ function Upload() {
 
     setMessage('');
     setConfirmation('');
-    let url = 'http://3.85.227.114/upload';
     const form = new FormData();
     form.append('file', acceptedFile);
     setShowProgress(true);
@@ -164,7 +164,7 @@ function Upload() {
       }
       intervalRef.current = setInterval(async () => {
         try {
-          const response = await axios.post('http://3.85.227.114/check_doc_status', { doc_name: filename });
+          const response = await axios.post(`${url}/check_doc_status`, { doc_name: filename });
           console.log(response);
 
           if (response.data.status === 'FINISHED') {
@@ -203,7 +203,7 @@ function Upload() {
     };
 
     try {
-      const response = await axios.post(url, form, {
+      const response = await axios.post(`${url}/upload`, form, {
         headers: { 'Content-Type': 'undefined' },
         timeout: 600000,
         onUploadProgress: (progressEvent) => {

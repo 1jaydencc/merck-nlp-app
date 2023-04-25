@@ -8,13 +8,17 @@ import Logo from './logo';
 import { Link } from 'react-router-dom';
 import SearchBar from './searchBar';
 
+const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY;
+const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
+const s3_bucket = process.env.REACT_APP_AWS_BUCKET;
+
 // Set the region
 AWS.config.update({ region: "us-east-1" });
 
 // Set the credentials
 AWS.config.update({
-  accessKeyId: "AKIA6PK7DR4OODM4CGNT",
-  secretAccessKey: "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",
+  accessKeyId: accessKeyId,
+  secretAccessKey: secretAccessKey,
 });
 
 export default function Results({ resultsData, renderResults }) {
@@ -40,7 +44,7 @@ export default function Results({ resultsData, renderResults }) {
   function generatePresignedUrl(bpNumber, fileType) {
     const s3 = new AWS.S3();
     const params = {
-      Bucket: 'merckbucket123',
+      Bucket: s3_bucket,
       Key: `${bpNumber}.` + (fileType === 'pdf' ? 'pdf' : 'xlsx'),
       Expires: 300, // URL expiration time in seconds
     };
