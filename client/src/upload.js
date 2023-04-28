@@ -159,7 +159,7 @@ function Upload() {
       for (let i = 20; i < 98; i++) {
         const timer = setTimeout(() => {
           setProgress(i);
-        }, progressiveDelay(i, 20, 100, 1.53));
+        }, progressiveDelay(i, 20, 100, 1.54));
         timers.current.push(timer);
       }
       intervalRef.current = setInterval(async () => {
